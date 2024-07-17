@@ -1,11 +1,13 @@
 
 const Item = require('../models/Item');
 
+
+// just for the time being, will change later
 const read = async (req, res) => {
   
   const { id, name, number } = req.body;
 
-  
+  return res.status(200).send( id + ' ' + name + ' ' +number );
 
 };
 
@@ -53,7 +55,23 @@ const update = async (req, res) => {
 };
 
 const deleteOne = async (req, res) => {
-  res.send('Delete');
+
+  const { id } = req.body;
+
+  const existingItem = await Item.findOne({ id }).exec();
+
+  if (!existingItem) {
+    return res.status(400).json({ message: 'Item does not exist' });
+  }
+
+  try {
+    const deletedItem = await Item.findOneAndDelete({ id }).exec();
+    return res.status(200).json(deletedItem);
+
+  } catch (error) {
+    return res.status(500).json({message: 'Internal server error'});
+  }
+
 };
 
 module.exports = {
