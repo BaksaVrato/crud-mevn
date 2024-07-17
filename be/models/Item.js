@@ -1,16 +1,18 @@
 const { Schema, model } = require('mongoose');
 
 const itemSchema = new Schema({
-  itemName: {
+  id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  name: {
     type: String,
     required: true
   },
-  itemNumber: {
+  number: {
     type: Number,
     required: true
-  },
-  timeArray: {
-    type: Array
   }
 });
 

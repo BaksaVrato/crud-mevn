@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controller/controller');
+const check = require('../middleware/fieldCheck');
 
-router.get('/get', controller.read);
-router.post('/create', controller.create);
-router.put('/update', controller.update);
-router.delete('/delete', controller.deleteOne);
+router.get('/get', check, controller.read);
+router.post('/create', check, controller.create);
+router.patch('/update', check, controller.update);
+router.delete('/delete', check, controller.deleteOne);
 
 module.exports = router;
