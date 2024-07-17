@@ -18,11 +18,10 @@ app.all('*', (req, res) => {
   res.status(404).send('Not Found');
 });
 
-const PORT = 3000;
 connectDB();
 
 mongoose.connection.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}`);
   });
 });
