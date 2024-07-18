@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-10 w-full shadow-md p-3">
+  <div class="fixed z-10 w-full shadow-md p-3 bg-white">
     <nav class="flex gap-4 flex-row">
 
       <router-link 
