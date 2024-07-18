@@ -7,6 +7,12 @@ const read = async (req, res) => {
   
   const { id, name, number } = req.body;
 
+  const item = await Item.findOne({ id }).exec();
+
+  if (!item) {
+    return res.status(400).json({ message: 'Item does not exist' });
+  }
+
   return res.status(200).send( id + ' ' + name + ' ' +number );
 
 };
