@@ -3,6 +3,10 @@ module.exports = {
   content: ['./public/**/*.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   presets: [],
   darkMode: 'media', // or 'class'
+  container: { // additional properties for container class
+    padding: '2rem',
+    center: true,
+  },
   theme: {
     accentColor: ({ theme }) => ({
       ...theme('colors'),
