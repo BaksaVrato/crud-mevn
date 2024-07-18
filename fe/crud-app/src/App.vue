@@ -1,15 +1,15 @@
 <template>
-  <div>
-    <nav>
-      <router-link :to="{ name: 'read' }">Read</router-link> |
-      <router-link :to="{ name: 'create' }">Create</router-link> |
-      <router-link :to="{ name: 'update' }">Update</router-link> | 
-      <router-link :to="{ name: 'delete' }">Delete</router-link> |
-    </nav>
-    <router-view/>
+  <div class="flex flex-col min-h-screen">
+    <Navbar/>
+    <section class="flex-1 mt-12">
+      <router-view/>
+    </section>
   </div>
 </template>
 
-<style>
+<script setup>
 
-</style>
+import Navbar from './components/Navbar.vue'
+
+
+</script>
