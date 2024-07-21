@@ -7,11 +7,26 @@
       <label for="id">Id</label>
       <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="ID of item you want to get">
 
-      <button type="submit" class="p-3 bg-blue-500 rounded-lg font-bold text-white mt-2">Read</button>
+      <button @click="onClick" type="submit" class="p-3 bg-blue-500 rounded-lg font-bold text-white mt-2">Read</button>
     </form>
   </div>
 </template>
 
-<script>
+<script setup>
+
+const axios = require('axios');
+
+const onClick = async () => {
+
+  axios({
+  method: 'get',
+  url: 'http://localhost:3000/get', // TODO: Change this
+  headers: {}, 
+  data: {
+    id: '1', // This is the body part
+  }
+});
+
+};
 
 </script>
