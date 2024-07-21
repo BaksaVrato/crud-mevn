@@ -1,6 +1,7 @@
 console.log('Running...');
 
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const connectDB = require('./db/db');
 const router = require('./routes/router');
@@ -8,7 +9,7 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(express.json(), router);
+app.use(cors(), express.json(), router);
 
 app.get('/', (req, res) => {
   res.send('Home');

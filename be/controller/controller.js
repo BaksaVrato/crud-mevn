@@ -7,13 +7,21 @@ const read = async (req, res) => {
   
   const { id, name, number } = req.body;
 
+  if (!id) {
+    return res.status(400).json({ message: 'Fields missing' });
+  }
+
+  if (typeof id !== 'number') {
+    return res.status(400).json({ message: 'Invalid data type' });
+  }
+
   const item = await Item.findOne({ id }).exec();
 
   if (!item) {
     return res.status(400).json({ message: 'Item does not exist' });
   }
 
-  return res.status(200).send( id + ' ' + name + ' ' +number );
+  return res.status(200).send( item.id + ' ' + item.name + ' ' + item.number );
 
 };
 
@@ -63,6 +71,14 @@ const update = async (req, res) => {
 const deleteOne = async (req, res) => {
 
   const { id } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ message: 'Fields missing' });
+  }
+
+  if (typeof id !== 'number') {
+    return res.status(400).json({ message: 'Invalid data type' });
+  }
 
   const existingItem = await Item.findOne({ id }).exec();
 

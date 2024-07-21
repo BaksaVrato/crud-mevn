@@ -18,14 +18,21 @@ const axios = require('axios');
 
 const onClick = async () => {
 
-  axios({
-  method: 'get',
-  url: 'http://localhost:3000/get', // TODO: Change this
-  headers: {}, 
-  data: {
-    id: '1', // This is the body part
-  }
-});
+  await axios({
+    method: 'post',
+    url: 'http://localhost:3000/get', // TODO: Change using .env
+    headers: {}, 
+    // for time being
+    data: {
+      id: 2 // This is the body part
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 };
 

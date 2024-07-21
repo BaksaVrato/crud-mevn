@@ -13,12 +13,35 @@
       <label for="number">Number</label>
       <input type="number" name="number" id="number" class="p-3 shadow-md rounded-sm" placeholder="New number">
 
-      <button type="submit" class="p-3 bg-amber-600 rounded-lg font-bold text-white mt-2">Update</button>
+      <button @click="onClick" type="submit" class="p-3 bg-amber-600 rounded-lg font-bold text-white mt-2">Update</button>
     </form>
   </div>
 </template>
 
-<script>
+<script setup>
+
+const axios = require('axios');
+
+const onClick = async () => {
+
+  await axios({
+    method: 'patch',
+    url: 'http://localhost:3000/update', // TODO: Change using .env
+    headers: {}, 
+    // for time being
+    data: {
+      id: 1, // This is the body part
+      name: 'stringessr',
+      number: 1
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+};
 
 </script>
 

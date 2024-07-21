@@ -13,11 +13,34 @@
       <label for="number">Number</label>
       <input type="number" name="number" id="number" class="p-3 shadow-md rounded-sm" placeholder="Number">
 
-      <button type="submit" class="p-3 bg-green-600 rounded-lg font-bold text-white mt-2">Create</button>
+      <button @click="onClick" type="submit" class="p-3 bg-green-600 rounded-lg font-bold text-white mt-2">Create</button>
     </form>
   </div>
 </template>
 
-<script>
+<script setup>
+
+const axios = require('axios');
+
+const onClick = async () => {
+
+  await axios({
+    method: 'post',
+    url: 'http://localhost:3000/create', // TODO: Change using .env
+    headers: {}, 
+    // for time being
+    data: {
+      id: 2, // This is the body part
+      name: 'string',
+      number: 1
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+};
 
 </script>
