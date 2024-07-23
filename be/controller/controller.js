@@ -7,7 +7,7 @@ const read = async (req, res) => {
   
   const { id, name, number } = req.body;
 
-  if (!id) {
+  if (id === null) {
     return res.status(400).json({ message: 'Fields missing' });
   }
 
@@ -18,7 +18,7 @@ const read = async (req, res) => {
   const item = await Item.findOne({ id }).exec();
 
   if (!item) {
-    return res.status(400).json({ message: 'Item does not exist' });
+    return res.status(404).json({ message: 'Item does not exist' });
   }
 
   return res.status(200).send( item.id + ' ' + item.name + ' ' + item.number );
