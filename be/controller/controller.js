@@ -32,7 +32,8 @@ const create = async (req, res) => {
   const existingItem = await Item.findOne({ id }).exec();
   
   if (existingItem) {
-    return res.status(400).json({ message: 'Item already exists' });
+    console.log('Item with this ID already exists');
+    return res.status(400).json({ message: 'Item with this ID already exists' });
   }
 
   try {
@@ -54,7 +55,7 @@ const update = async (req, res) => {
   const existingItem = await Item.findOne({ id }).exec();
 
   if (!existingItem) {
-    return res.status(400).json({ message: 'Item does not exist' });
+    return res.status(404).json({ message: 'Item does not exist' });
   }
 
   try {
@@ -83,7 +84,7 @@ const deleteOne = async (req, res) => {
   const existingItem = await Item.findOne({ id }).exec();
 
   if (!existingItem) {
-    return res.status(400).json({ message: 'Item does not exist' });
+    return res.status(404).json({ message: 'Item does not exist' });
   }
 
   try {

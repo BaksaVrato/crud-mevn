@@ -31,10 +31,10 @@ const onClick = async () => {
       id: idField.value
     }
   })
-  .then(function (response) {
+  .then((response) => {
     console.log(response);
   })
-  .catch(function (error) {
+  .catch((error) => {
     console.log(error);
   });
 

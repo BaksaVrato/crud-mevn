@@ -5,13 +5,13 @@
       class="flex flex-col gap-3 mt-4 w-full sm:w-1/2"
     >
       <label for="id">Id</label>
-      <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="Id of item you want to update">
+      <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="Id of item you want to update" v-model="idField">
 
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" class="p-3 shadow-md rounded-sm" placeholder="New name">
+      <input type="text" name="name" id="name" class="p-3 shadow-md rounded-sm" placeholder="New name" v-model="nameField" >
 
       <label for="number">Number</label>
-      <input type="number" name="number" id="number" class="p-3 shadow-md rounded-sm" placeholder="New number">
+      <input type="number" name="number" id="number" class="p-3 shadow-md rounded-sm" placeholder="New number" v-model="numberField">
 
       <button @click="onClick" class="p-3 bg-amber-600 rounded-lg font-bold text-white mt-2">Update</button>
     </section>
@@ -20,7 +20,13 @@
 
 <script setup>
 
+import { ref } from 'vue';
+
 const axios = require('axios');
+
+const idField = ref(null);
+const nameField = ref(null);
+const numberField = ref(null);
 
 const onClick = async () => {
 
@@ -30,15 +36,15 @@ const onClick = async () => {
     headers: {}, 
     // for time being
     data: {
-      id: 1, // This is the body part
-      name: 'stringessr',
-      number: 1
+      id: idField.value, // This is the body part
+      name: nameField.value,
+      number: numberField.value
     }
   })
-  .then(function (response) {
+  .then((response) => {
     console.log(response);
   })
-  .catch(function (error) {
+  .catch((error) => {
     console.log(error);
   });
 };

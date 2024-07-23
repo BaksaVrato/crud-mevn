@@ -5,7 +5,7 @@
       class="flex flex-col gap-3 mt-4 w-full sm:w-1/2"
     >
       <label for="id">Id</label>
-      <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="ID of item you want to delete">
+      <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="ID of item you want to delete" v-model="idField">
 
       <button @click="onClick" class="p-3 bg-red-500 rounded-lg font-bold text-white mt-2">Delete</button>
     </section>
@@ -14,7 +14,11 @@
 
 <script setup>
 
+import { ref } from 'vue';
+
 const axios = require('axios');
+
+const idField = ref(null);
 
 const onClick = async () => {
 
@@ -24,15 +28,13 @@ const onClick = async () => {
     headers: {}, 
     // for time being
     data: {
-      id: 1, // This is the body part
-      name: 'string',
-      number: 1
+      id: idField.value
     }
   })
-  .then(function (response) {
+  .then((response) => {
     console.log(response);
   })
-  .catch(function (error) {
+  .catch((error) => {
     console.log(error);
   });
 };
