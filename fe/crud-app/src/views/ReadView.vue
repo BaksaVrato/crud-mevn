@@ -14,6 +14,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import router from '@/router';
 
 
 const axios = require('axios');
@@ -26,18 +27,18 @@ const onClick = async () => {
     method: 'post',
     url: 'http://localhost:3000/get', // TODO: Change using .env
     headers: {}, 
-    // for time being
     data: {
       id: idField.value
     }
   })
   .then((response) => {
-    console.log(response);
+    console.log(response.status);
   })
   .catch((error) => {
-    console.log(error);
+    console.log(error.response.status);
+    const status = (error.response.status).toString();
+    router.push({ name: status, params: { id: idField.value } });
   });
-
 };
 
 </script>

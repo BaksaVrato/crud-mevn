@@ -26,13 +26,12 @@ const onClick = async () => {
     method: 'delete',
     url: 'http://localhost:3000/delete', // TODO: Change using .env
     headers: {}, 
-    // for time being
     data: {
       id: idField.value
     }
   })
   .then((response) => {
-    console.log(response);
+    console.log(response.status);
   })
   .catch((error) => {
     console.log(error);

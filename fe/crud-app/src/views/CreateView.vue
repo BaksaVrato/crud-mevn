@@ -34,15 +34,14 @@ const onClick = async () => {
     method: 'post',
     url: 'http://localhost:3000/create', // TODO: Change using .env
     headers: {}, 
-    // for time being
     data: {
-      id: idField.value, // This is the body part
+      id: idField.value, 
       name: nameField.value,
       number: numberField.value
     }
   })
   .then((response) => {
-    console.log(response);
+    console.log(response.status);
   })
   .catch((error) => {
     console.log(error);
