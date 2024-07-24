@@ -35,6 +35,11 @@ const routes = [
     path: '/400',
     name: '400',
     component: () => import('../views/400View.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*', // Catch-all route for undefined paths
+    name: 'default',
+    component: () => import('../views/ReadView.vue')
   }
 ]
 

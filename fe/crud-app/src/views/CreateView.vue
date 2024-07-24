@@ -21,6 +21,7 @@
 <script setup>
 
 import { ref } from 'vue';
+import router from '@/router';
 
 const axios = require('axios');
 
@@ -44,7 +45,9 @@ const onClick = async () => {
     console.log(response.status);
   })
   .catch((error) => {
-    console.log(error);
+    console.log(error.response.status);
+    const status = (error.response.status).toString();
+    router.push({ name: status});
   });
 };
 
