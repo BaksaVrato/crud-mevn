@@ -8,10 +8,10 @@
       <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="ID of item you want to get" v-model="idField" @focusin="hideItem()">
 
       <button @click="onClick" class="p-3 bg-blue-500 rounded-lg font-bold text-white mt-2">Read</button>
+    
+      <!-- TODO: DO BETTER (idField is different variable) -->
+      <Item v-show="isItemShowing" :id="idField" :name="nameField" :number="numberField"/>
     </section>
-
-    <Item v-show="isItemShowing" :id="idField" :name="nameField" :number="numberField"/>
-
   </div>
 </template>
 
@@ -46,6 +46,8 @@ const onClick = async () => {
     }
   })
   .then((response) => {
+
+    console.log(response.status)
 
     const data = response.data.split(' ');
     

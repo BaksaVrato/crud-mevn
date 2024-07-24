@@ -12,8 +12,10 @@
 
       <label for="number">Number</label>
       <input type="number" name="number" id="number" class="p-3 shadow-md rounded-sm" placeholder="Number" v-model="numberField">
-
       <button @click="onClick" class="p-3 bg-green-600 rounded-lg font-bold text-white mt-2">Create</button>
+
+      <Item v-if="isItemShowing" :id="itemID" :name="itemName" :number="itemNumber" />
+
     </section>
   </div>
 </template>
@@ -23,11 +25,20 @@
 import { ref } from 'vue';
 import router from '@/router';
 
+import Item from '@/components/Item.vue';
+
 const axios = require('axios');
 
 const idField = ref(null);
 const nameField = ref(null);
 const numberField = ref(null);
+
+const isItemShowing = ref(false);
+
+const itemID = ref(null);
+const itemName = ref(null);
+const itemNumber = ref(null);
+
 
 const onClick = async () => {
 
@@ -42,7 +53,10 @@ const onClick = async () => {
     }
   })
   .then((response) => {
-    console.log(response.status);
+    itemID.value = idField.value;
+    itemName.value = nameField.value;
+    itemNumber.value = numberField.value;
+    isItemShowing.value = true;
   })
   .catch((error) => {
     console.log(error.response.status);
