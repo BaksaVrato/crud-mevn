@@ -8,6 +8,8 @@
       <input type="number" name="id" id="id" class="p-3 shadow-md rounded-sm flex" placeholder="ID of item you want to delete" v-model="idField">
 
       <button @click="onClick" class="p-3 bg-red-500 rounded-lg font-bold text-white mt-2">Delete</button>
+
+      <Item v-if="isItemShowing" :id="itemID" :name="itemName" :number="itemNumber" />
     </section>
   </div>
 </template>
@@ -17,9 +19,17 @@
 import { ref } from 'vue';
 import router from '@/router';
 
+import Item from '@/components/Item.vue';
+
 const axios = require('axios');
 
 const idField = ref(null);
+
+const isItemShowing = ref(false);
+
+const itemID = ref(null);
+const itemName = ref(null);
+const itemNumber = ref(null);
 
 const onClick = async () => {
 
@@ -33,6 +43,12 @@ const onClick = async () => {
   })
   .then((response) => {
     console.log(response.status);
+
+    itemID.value = response.data.id;
+    itemName.value = response.data.name;
+    itemNumber.value = response.data.number;
+
+    isItemShowing.value = true;
   })
   .catch((error) => {
     console.log(error.response.status);
