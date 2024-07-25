@@ -9,7 +9,10 @@
 
       <button @click="onClick" class="p-3 bg-red-500 rounded-lg font-bold text-white mt-2">Delete</button>
 
+      <!-- todo: do using Suspense -->
       <Item v-if="isItemShowing" :id="itemID" :name="itemName" :number="itemNumber" />
+      <ItemLoading v-if="isLoading" />
+
     </section>
   </div>
 </template>
@@ -20,18 +23,22 @@ import { ref } from 'vue';
 import router from '@/router';
 
 import Item from '@/components/Item.vue';
+import ItemLoading from '@/components/ItemLoading.vue';
 
 const axios = require('axios');
 
 const idField = ref(null);
 
 const isItemShowing = ref(false);
+const isLoading = ref(false);
 
 const itemID = ref(null);
 const itemName = ref(null);
 const itemNumber = ref(null);
 
 const onClick = async () => {
+
+  isLoading.value = true;
 
   await axios({
     method: 'delete',
@@ -49,12 +56,15 @@ const onClick = async () => {
     itemNumber.value = response.data.number;
 
     isItemShowing.value = true;
+    isLoading.value = false;
   })
   .catch((error) => {
     console.log(error.response.status);
     const status = (error.response.status).toString();
     router.push({ name: status });
   });
+  isLoading.value = false;
+  isItemShowing.value = false;
 };
 
 </script>
