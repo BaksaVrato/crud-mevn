@@ -39,32 +39,35 @@ const itemNumber = ref(null);
 const onClick = async () => {
 
   isLoading.value = true;
-
-  await axios({
-    method: 'delete',
-    url: 'http://localhost:3000/delete', // TODO: Change using .env
-    headers: {}, 
-    data: {
-      id: idField.value
-    }
-  })
-  .then((response) => {
-    console.log(response.status);
-
-    itemID.value = response.data.id;
-    itemName.value = response.data.name;
-    itemNumber.value = response.data.number;
-
-    isItemShowing.value = true;
-    isLoading.value = false;
-  })
-  .catch((error) => {
-    console.log(error.response.status);
-    const status = (error.response.status).toString();
-    router.push({ name: status });
-  });
-  isLoading.value = false;
   isItemShowing.value = false;
+
+  setTimeout( async () => {
+    await axios({
+      method: 'delete',
+      url: 'http://localhost:3000/delete', // TODO: Change using .env
+      headers: {}, 
+      data: {
+        id: idField.value
+      }
+    })
+    .then((response) => {
+      console.log(response.status);
+
+      itemID.value = response.data.id;
+      itemName.value = response.data.name;
+      itemNumber.value = response.data.number;
+
+      isItemShowing.value = true;
+      isLoading.value = false;
+    })
+    .catch((error) => {
+      console.log(error.response.status);
+      const status = (error.response.status).toString();
+      router.push({ name: status });
+      isLoading.value = false;
+      isItemShowing.value = false;
+    });
+  }, 1000);
 };
 
 </script>

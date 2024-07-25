@@ -36,20 +36,12 @@ const numberField = ref(null);
 const isItemShowing = ref(false);
 const isLoading = ref(false);
 
-const queryTimeout = ref(null);
-
-const hideItem = () => {
-  if(isItemShowing.value) isItemShowing.value = false;
-  itemID.value = null;
-};
-
 const onClick = async () => {
 
   isLoading.value = true;
   isItemShowing.value = false;
 
-  clearTimeout(queryTimeout.value);
-  queryTimeout.value = setTimeout( async () => {
+  setTimeout( async () => {
 
     await axios({
       method: 'post',
@@ -90,7 +82,5 @@ const onClick = async () => {
   }, 1000);
   
 };
-
-
 
 </script>

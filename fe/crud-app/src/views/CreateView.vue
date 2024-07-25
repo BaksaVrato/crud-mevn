@@ -47,31 +47,37 @@ const itemNumber = ref(null);
 const onClick = async () => {
 
   isLoading.value = true;
+  isItemShowing.value = false;
 
-  await axios({
-    method: 'post',
-    url: 'http://localhost:3000/create', // TODO: Change using .env
-    headers: {}, 
-    data: {
-      id: idField.value, 
-      name: nameField.value,
-      number: numberField.value
-    }
-  })
-  .then((response) => {
-    itemID.value = idField.value;
-    itemName.value = nameField.value;
-    itemNumber.value = numberField.value;
-    isItemShowing.value = true;
-    isLoading.value = false;
-  })
-  .catch((error) => {
-    console.log(error.response.status);
-    const status = (error.response.status).toString();
-    router.push({ name: status});
-    isLoading.value = false;
-    isItemShowing.value = false;
-  });
+  setTimeout( async () => {
+    
+    await axios({
+      method: 'post',
+      url: 'http://localhost:3000/create', // TODO: Change using .env
+      headers: {}, 
+      data: {
+        id: idField.value, 
+        name: nameField.value,
+        number: numberField.value
+      }
+    })
+    .then((response) => {
+      itemID.value = idField.value;
+      itemName.value = nameField.value;
+      itemNumber.value = numberField.value;
+      isItemShowing.value = true;
+      isLoading.value = false;
+    })
+    .catch((error) => {
+      console.log(error.response.status);
+      const status = (error.response.status).toString();
+      router.push({ name: status});
+      isLoading.value = false;
+      isItemShowing.value = false;
+    });
+  }, 1000);
+
 };
+
 
 </script>
